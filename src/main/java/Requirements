@@ -1,0 +1,28 @@
+Let's name our project "Library Automation". This project is a library automation system that processes information about books, authors, and members and stores this information in a database.
+
+Requirement Document (Requirements):
+
+Add Book:
+
+The user should be able to add a new book by entering information such as book title, author name, publisher, and publication date.
+When a book is added, a Book object containing the relevant information should be created and stored in the database.
+Search Book:
+
+The user should be able to search for books using information such as book title or author name.
+In the search results, the system should list the matching books' information and present it to the user.
+Add Member:
+
+The user should be able to add a new member by entering information such as first name, last name, email, and phone number.
+When a member is added, a Member object containing the relevant information should be created and stored in the database.
+Search Member:
+
+The user should be able to search for members using information such as first name, last name, or email.
+In the search results, the system should list the matching members' information and present it to the user.
+Lend Book:
+
+The user should be able to lend a book to a specific member.
+When the lending process is completed, a Loan object containing the relevant information should be created and stored in the database.
+Return Book:
+
+The user should be able to accept the return of lent books.
+When the return process is completed, the status of the related Loan object should be updated.
