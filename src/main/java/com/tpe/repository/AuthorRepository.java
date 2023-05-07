@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 
-public class AuthorRepository implements BaseRepository <Author> {
+public class AuthorRepository implements BaseRepository<Author> {
 
     @Override
     public List<Author> findAll() {

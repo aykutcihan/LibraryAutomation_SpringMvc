@@ -4,10 +4,11 @@ import com.tpe.domain.Book;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+
 @Repository
 
-public class BookRepository implements BaseRepository <Book>{
-
+public class BookRepository implements BaseRepository<Book> {
     @Override
     public List<Book> findAll() {
         return null;

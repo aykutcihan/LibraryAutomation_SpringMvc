@@ -1,7 +1,7 @@
 package com.tpe.service;
 
 import com.tpe.domain.Member;
-import com.tpe.repository.LoanRepository;
+import com.tpe.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -13,35 +13,35 @@ import java.util.List;
 @Scope("prototype")
 public class MemberService implements BaseService<Member>{
 
-    private LoanRepository loanRepository;
+    private MemberRepository memberRepository;
 
     @Autowired
-    public MemberService(@Qualifier("loanRepository") LoanRepository loanRepository) {
-        this.loanRepository = loanRepository;
+    public MemberService(@Qualifier("memberRepository") MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
     public List<Member> findAll() {
-        return null;
+        return memberRepository.findAll();
     }
 
     @Override
     public Member findById(long id) {
-        return null;
+        return memberRepository.findById(id);
     }
 
     @Override
-    public Member save(Member entity) {
-        return null;
+    public Member save(Member member) {
+        return memberRepository.save(member);
     }
 
     @Override
     public void delete(long id) {
-
+        memberRepository.delete(id);
     }
 
     @Override
-    public void update(Member entity) {
-
+    public void update(Member member) {
+        memberRepository.update(member);
     }
 }

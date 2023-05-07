@@ -7,8 +7,7 @@ import java.util.List;
 
 @Repository
 
-public class MemberRepository implements BaseRepository <Member> {
-
+public class MemberRepository implements BaseRepository<Member> {
     @Override
     public List<Member> findAll() {
         return null;
