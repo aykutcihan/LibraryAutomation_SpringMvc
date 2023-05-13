@@ -3,39 +3,50 @@ package com.tpe.controller;
 import com.tpe.domain.Author;
 import com.tpe.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/authors")
 public class AuthorController {
 
     @Autowired
     private AuthorService authorService;
 
+    @GetMapping("/new")
+    public String sendAuthorForm(@ModelAttribute("author") Author author) {
+        return "authorForm";
+    }
+
+    @PostMapping("/saveAuthor")
+    public String createAuthor(@ModelAttribute Author author) {
+        authorService.saveAuthor(author);
+        return "redirect:/authors";
+    }
+
     @GetMapping
-    public List<Author> getAllAuthors() {
-        return authorService.findAll();
+    public ModelAndView getAuthors(){
+        List<Author> list = authorService.getAllAuthor();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("authors",list);
+        mav.setViewName("authors");
+        return mav;
     }
 
-    @GetMapping("/{id}")
-    public Author getAuthorById(@PathVariable long id) {
-        return authorService.findById(id);
+    @GetMapping("/update")
+    public String showFormForUpdate(@RequestParam("id") Long id, Model model) {
+        Author author = authorService.findAuthorById(id);
+        model.addAttribute(author);
+        return "authorForm";
     }
 
-    @PostMapping
-    public Author createAuthor(@RequestBody Author author) {
-        return authorService.save(author);
-    }
-
-    @PutMapping("/{id}")
-    public void updateAuthor(@PathVariable long id, @RequestBody Author author) {
-        authorService.update(author);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable long id) {
-        authorService.delete(id);
+    @GetMapping("/delete/{id}")
+    public String deleteAuthor(@PathVariable Long id){
+        authorService.deleteAuthor(id);
+        return "redirect:/authors";
     }
 }

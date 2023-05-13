@@ -1,47 +1,18 @@
 package com.tpe.service;
 
 import com.tpe.domain.Member;
-import com.tpe.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("memberService")
-@Scope("prototype")
-public class MemberService implements BaseService<Member>{
+public interface MemberService {
 
-    private MemberRepository memberRepository;
+    List<Member> getAllMembers();
 
-    @Autowired
-    public MemberService(@Qualifier("memberRepository") MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    Member findMemberById(Long id);
 
-    @Override
-    public List<Member> findAll() {
-        return memberRepository.findAll();
-    }
+    void saveMember(Member member);
 
-    @Override
-    public Member findById(long id) {
-        return memberRepository.findById(id);
-    }
+    void updateMember(Member member);
 
-    @Override
-    public Member save(Member member) {
-        return memberRepository.save(member);
-    }
-
-    @Override
-    public void delete(long id) {
-        memberRepository.delete(id);
-    }
-
-    @Override
-    public void update(Member member) {
-        memberRepository.update(member);
-    }
+    void deleteMember(Long id);
 }

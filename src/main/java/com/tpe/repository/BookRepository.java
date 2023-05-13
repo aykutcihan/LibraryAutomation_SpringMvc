@@ -1,36 +1,19 @@
 package com.tpe.repository;
 
 import com.tpe.domain.Book;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
+public interface BookRepository {
 
-@Repository
+    List<Book> getAll();
 
-public class BookRepository implements BaseRepository<Book> {
-    @Override
-    public List<Book> findAll() {
-        return null;
-    }
+    Optional<Book> findById(Long id);
 
-    @Override
-    public Book findById(long id) {
-        return null;
-    }
+    void save(Book book);
 
-    @Override
-    public Book save(Book entity) {
-        return null;
-    }
+    void update(Book book);
 
-    @Override
-    public void delete(long id) {
-
-    }
-
-    @Override
-    public void update(Book entity) {
-
-    }
+    void delete(Long id);
 }

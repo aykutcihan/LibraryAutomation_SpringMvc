@@ -1,35 +1,19 @@
 package com.tpe.repository;
 
 import com.tpe.domain.Loan;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
+public interface LoanRepository {
 
-public class LoanRepository implements BaseRepository<Loan> {
-    @Override
-    public List<Loan> findAll() {
-        return null;
-    }
+    List<Loan> getAll();
 
-    @Override
-    public Loan findById(long id) {
-        return null;
-    }
+    Optional<Loan> findById(Long id);
 
-    @Override
-    public Loan save(Loan entity) {
-        return null;
-    }
+    void save(Loan loan);
 
-    @Override
-    public void delete(long id) {
+    void update(Loan loan);
 
-    }
-
-    @Override
-    public void update(Loan entity) {
-
-    }
+    void delete(Long id);
 }

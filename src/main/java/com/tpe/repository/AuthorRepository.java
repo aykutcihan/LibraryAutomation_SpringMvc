@@ -1,36 +1,19 @@
 package com.tpe.repository;
 
 import com.tpe.domain.Author;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
+public interface AuthorRepository {
 
-public class AuthorRepository implements BaseRepository<Author> {
+    List<Author> getAll();
 
-    @Override
-    public List<Author> findAll() {
-        return null;
-    }
+    Optional<Author> findById(Long id);
 
-    @Override
-    public Author findById(long id) {
-        return null;
-    }
+    void save(Author author);
 
-    @Override
-    public Author save(Author entity) {
-        return null;
-    }
+    void update(Author author);
 
-    @Override
-    public void delete(long id) {
-
-    }
-
-    @Override
-    public void update(Author entity) {
-
-    }
+    void delete(Long id);
 }

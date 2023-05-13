@@ -1,35 +1,19 @@
 package com.tpe.repository;
 
 import com.tpe.domain.Member;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
+public interface MemberRepository {
 
-public class MemberRepository implements BaseRepository<Member> {
-    @Override
-    public List<Member> findAll() {
-        return null;
-    }
+    List<Member> getAll();
 
-    @Override
-    public Member findById(long id) {
-        return null;
-    }
+    Optional<Member> findById(Long id);
 
-    @Override
-    public Member save(Member entity) {
-        return null;
-    }
+    void save(Member member);
 
-    @Override
-    public void delete(long id) {
+    void update(Member member);
 
-    }
-
-    @Override
-    public void update(Member entity) {
-
-    }
+    void delete(Long id);
 }

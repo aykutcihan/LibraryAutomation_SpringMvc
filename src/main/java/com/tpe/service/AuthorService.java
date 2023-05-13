@@ -1,50 +1,18 @@
 package com.tpe.service;
 
-
 import com.tpe.domain.Author;
-import com.tpe.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component( "authorService")
-@Scope("prototype" )
-public class AuthorService implements BaseService<Author> {
+public interface AuthorService {
 
-    private AuthorRepository authorRepository;
+    List<Author> getAllAuthor();
 
-    @Autowired
-    public AuthorService(@Qualifier("authorRepository") AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+    Author findAuthorById(Long id);
 
-    @Override
-    public List<Author> findAll() {
-        return authorRepository.findAll();
-    }
+    void saveAuthor(Author author);
 
-    @Override
-    public Author findById(long id) {
-        return authorRepository.findById(id);
-    }
+    void updateAuthor(Author author);
 
-    @Override
-    public Author save(Author author) {
-        return authorRepository.save(author);
-    }
-
-    @Override
-    public void delete(long id) {
-        authorRepository.delete(id);
-
-    }
-
-    @Override
-    public void update(Author author) {
-        authorRepository.update(author);
-
-    }
+    void deleteAuthor(Long id);
 }

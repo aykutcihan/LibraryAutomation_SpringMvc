@@ -1,33 +1,28 @@
 package com.tpe.domain;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
+@Entity
+@Table(name="t_loan")
 public class Loan {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
-    private LocalDate loanDate;
-    private LocalDate dueDate;
-    private LocalDate returnDate;
 
-    public Loan() {
-    }
-
-    public Loan(Long id, Book book, Member member, LocalDate loanDate, LocalDate dueDate, LocalDate returnDate) {
-        this.id = id;
-        this.book = book;
-        this.member = member;
-        this.loanDate = loanDate;
-        this.dueDate = dueDate;
-        this.returnDate = returnDate;
-    }
+    private LocalDateTime loanDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Book getBook() {
@@ -46,28 +41,8 @@ public class Loan {
         this.member = member;
     }
 
-    public LocalDate getLoanDate() {
+    public LocalDateTime getLoanDate() {
         return loanDate;
-    }
-
-    public void setLoanDate(LocalDate loanDate) {
-        this.loanDate = loanDate;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public LocalDate getReturnDate() {
-        return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
     }
 
     @Override
@@ -77,8 +52,6 @@ public class Loan {
                 ", book=" + book +
                 ", member=" + member +
                 ", loanDate=" + loanDate +
-                ", dueDate=" + dueDate +
-                ", returnDate=" + returnDate +
                 '}';
     }
 }

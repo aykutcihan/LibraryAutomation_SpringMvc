@@ -1,25 +1,27 @@
 package com.tpe.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name="t_author")
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message="First Name cannot be empty")
     private String firstName;
+
+    @NotEmpty(message="Last Name cannot be empty")
     private String lastName;
 
-    public Author() {
-    }
-
-    public Author(Long id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    private LocalDateTime birthDate;
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -38,12 +40,21 @@ public class Author {
         this.lastName = lastName;
     }
 
+    public LocalDateTime getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDateTime birthDate) {
+        this.birthDate = birthDate;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
                 '}';
     }
 }

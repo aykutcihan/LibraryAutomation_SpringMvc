@@ -3,39 +3,50 @@ package com.tpe.controller;
 import com.tpe.domain.Member;
 import com.tpe.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/members")
 public class MemberController {
 
     @Autowired
     private MemberService memberService;
 
+    @GetMapping("/new")
+    public String sendMemberForm(@ModelAttribute("member") Member member) {
+        return "memberForm";
+    }
+
+    @PostMapping("/saveMember")
+    public String createMember(@ModelAttribute Member member) {
+        memberService.saveMember(member);
+        return "redirect:/members";
+    }
+
     @GetMapping
-    public List<Member> getAllMembers() {
-        return memberService.findAll();
+    public ModelAndView getMembers(){
+        List<Member> list = memberService.getAllMembers();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("members",list);
+        mav.setViewName("members");
+        return mav;
     }
 
-    @GetMapping("/{id}")
-    public Member getMemberById(@PathVariable long id) {
-        return memberService.findById(id);
+    @GetMapping("/update")
+    public String showFormForUpdate(@RequestParam("id") Long id, Model model) {
+        Member member = memberService.findMemberById(id);
+        model.addAttribute(member);
+        return "memberForm";
     }
 
-    @PostMapping
-    public Member createMember(@RequestBody Member member) {
-        return memberService.save(member);
-    }
-
-    @PutMapping("/{id}")
-    public void updateMember(@PathVariable long id, @RequestBody Member member) {
-        memberService.update(member);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteMember(@PathVariable long id) {
-        memberService.delete(id);
+    @GetMapping("/delete/{id}")
+    public String deleteMember(@PathVariable Long id){
+        memberService.deleteMember(id);
+        return "redirect:/members";
     }
 }

@@ -1,33 +1,27 @@
 package com.tpe.domain;
 
-import java.time.LocalDate;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 
+@Entity
+@Table(name="t_book")
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message="Title cannot be empty")
     private String title;
-    private Author author;
-    private String publisher;
-    private LocalDate publicationDate;
 
-    public Book() {
-        this.publicationDate = LocalDate.now();
-    }
+    @NotEmpty(message="Author cannot be empty")
+    private String author;
 
-    public Book(Long id, String title, Author author, String publisher) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.publisher = publisher;
-        this.publicationDate = LocalDate.now();
-
-    }
+    private LocalDateTime createDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -38,28 +32,16 @@ public class Book {
         this.title = title;
     }
 
-    public Author getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
-    public LocalDate getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
     @Override
@@ -67,9 +49,8 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", author=" + author +
-                ", publisher='" + publisher + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", author='" + author + '\'' +
+                ", createDate=" + createDate +
                 '}';
     }
 }
